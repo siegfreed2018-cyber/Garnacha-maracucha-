@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Garnacha Maracucha</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background: #fff8e7;
+}
+
+header{
+    background: linear-gradient(90deg, #ffcc00, #0033a0, #cf142b);
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+h1{ margin:0; font-size:28px; }
+.subtitle{ font-size:14px; margin-top:5px; }
+
+.container{
+    padding:15px;
+}
+
+.menu-section{
+    margin-bottom:25px;
+}
+
+.item{
+    background:white;
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+button{
+    background:#0033a0;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+}
+
+button:hover{
+    background:#001f5c;
+}
+
+.cart{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:white;
+    padding:15px;
+    box-shadow:0 -2px 10px rgba(0,0,0,0.2);
+}
+
+.total{
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.whatsapp{
+    background:#25D366;
+    width:100%;
+    padding:12px;
+    border:none;
+    color:white;
+    font-size:16px;
+    border-radius:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>🇻🇪 🌴 LA GARNACHA MARACUCHA 🌴 🇲🇽</h1>
+<div class="subtitle">Del Zulia para México</div>
+</header>
+
+<div class="container">
+
+<!-- AREPAS -->
+<div class="menu-section">
+<h2>🫓 Arepas</h2>
+
+<div class="item">
+<span>Reina Pepiada - $100</span>
+<button onclick="addItem('Reina Pepiada',100)">Agregar</button>
+</div>
+
+<div class="item">
+<span>Pelúa - $90</span>
+<button onclick="addItem('Pelúa',90)">Agregar</button>
+</div>
+
+<div class="item">
+<span>Catira - $80</span>
+<button onclick="addItem('Catira',80)">Agregar</button>
+</div>
+
+<div class="item">
+<span>Dominó - $70</span>
+<button onclick="addItem('Dominó',70)">Agregar</button>
+</div>
+</div>
+
+<!-- PATACONES -->
+<div class="menu-section">
+<h2>🍌 Patacones</h2>
+
+<div class="item">
+<span>Mixto - $150</span>
+<button onclick="addItem('Patacón Mixto',150)">Agregar</button>
+</div>
+
+<div class="item">
+<span>La Garnacha - $180</span>
+<button onclick="addItem('Patacón Garnacha',180)">Agregar</button>
+</div>
+</div>
+
+<!-- BEBIDAS -->
+<div class="menu-section">
+<h2>🥤 Bebidas</h2>
+
+<div class="item">
+<span>Papelón - $40</span>
+<button onclick="addItem('Papelón',40)">Agregar</button>
+</div>
+
+<div class="item">
+<span>Chicha - $50</span>
+<button onclick="addItem('Chicha',50)">Agregar</button>
+</div>
+</div>
+
+</div>
+
+<!-- CART -->
+<div class="cart">
+<div class="total" id="total">Total: $0</div>
+<button class="whatsapp" onclick="sendWhatsApp()">
+📲 Enviar pedido por WhatsApp
+</button>
+</div>
+
+<script>
+
+let cart = [];
+let total = 0;
+
+function addItem(name, price){
+    cart.push({name, price});
+    total += price;
+    document.getElementById("total").innerText = "Total: $" + total;
+}
+
+function sendWhatsApp(){
+
+    if(cart.length === 0){
+        alert("Agrega productos primero");
+        return;
+    }
+
+    let message = "🌴 LA GARNACHA MARACUCHA 🌴%0A%0APedido:%0A";
+
+    cart.forEach(item=>{
+        message += "• " + item.name + " - $" + item.price + "%0A";
+    });
+
+    message += "%0ATotal: $" + total;
+    message += "%0A%0A🇻🇪 Del Zulia para México 🇲🇽";
+
+    let url = "https://wa.me/525569610587?text=" + message;
+
+    window.open(url, "_blank");
+}
+
+</script>
+
+</body>
+</html>
